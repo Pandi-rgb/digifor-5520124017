@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 13: Presentasi Proyek Forensik & Sidang Semu - UNIQHBA</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyan: {
+                            50: '#ecfeff',
+                            100: '#cffafe',
+                            200: '#a5f3fc',
+                            300: '#67e8f9',
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            700: '#0e7490',
+                            800: '#155e75',
+                            900: '#164e63',
+                            950: '#083344',
+                        },
+                        darkBg: '#030712',
+                        cardBg: '#0b1329',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .neon-glow {
+            box-shadow: 0 0 25px rgba(6, 182, 212, 0.25);
+        }
+        .neon-glow-lg {
+            box-shadow: 0 0 40px rgba(6, 182, 212, 0.4);
+        }
+        .text-glow {
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.6);
+        }
+        .cyber-border {
+            border: 1px solid rgba(6, 182, 212, 0.3);
+            background: linear-gradient(135deg, rgba(11, 19, 41, 0.9) 0%, rgba(3, 7, 18, 0.95) 100%);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #030712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0e7490;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-slate-950 overflow-x-hidden">
+
+    <!-- Top Header Navigation Bar -->
+    <header class="w-full border-b border-cyan-900/50 bg-slate-950/80 backdrop-blur-md sticky top-0 z-50 px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center neon-glow">
+                <i class="fa-solid fa-shield-halved text-slate-950 text-xl font-bold"></i>
+            </div>
+            <div>
+                <h1 class="text-sm font-bold text-cyan-400 tracking-wider uppercase">UNIQHBA Cyber Security</h1>
+                <p class="text-xs text-slate-400">Modul 13: Forensik Digital & Sidang Semu (Moot Court)</p>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <span id="slide-counter" class="text-xs font-mono px-3 py-1 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-700/50">
+                Slide 1 / 12
+            </span>
+            <button onclick="toggleOverview()" class="p-2 rounded-lg bg-slate-900 hover:bg-cyan-950 text-cyan-400 border border-cyan-800/50 transition-all flex items-center space-x-1 text-xs">
+                <i class="fa-solid fa-grip"></i>
+                <span class="hidden md:inline">Indeks</span>
+            </button>
+            <button onclick="toggleFullscreen()" class="p-2 rounded-lg bg-slate-900 hover:bg-cyan-950 text-cyan-400 border border-cyan-800/50 transition-all text-xs" title="Fullscreen">
+                <i class="fa-solid fa-expand"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Presentation Container -->
+    <main class="flex-grow flex items-center justify-center p-4 md:p-8 relative">
+        <div class="w-full max-w-6xl mx-auto">
+
+            <!-- SLIDE 1: TITLE & COVER -->
+            <div class="slide active transition-all duration-500 transform" data-slide="1">
+                <div class="cyber-border rounded-3xl p-8 md:p-14 text-center relative overflow-hidden neon-glow-lg">
+                    <div class="absolute -top-24 -right-24 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    
+                    <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-500/30 text-cyan-400 text-xs font-mono uppercase tracking-widest mb-6">
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                        <span>Universitas Qamarul Huda Badaruddin (UNIQHBA) • IF-704</span>
+                    </div>
+
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-white tracking-tight mb-4 text-glow">
+                        PRESENTASI PROYEK FORENSIK & <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300">SIDANG SEMU (BAGIAN 1)</span>
+                    </h2>
+
+                    <p class="text-slate-300 text-base md:text-lg max-w-2xl mx-auto mb-8 font-light">
+                        Mata Kuliah: Forensik Digital | Bobot: 3 SKS | Pengampu: Tim Dosen Keamanan Siber UNIQHBA
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto text-left mb-8">
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/50">
+                            <div class="text-cyan-400 font-mono text-xs mb-1"><i class="fa-solid fa-layer-group mr-1.5"></i> Kategori</div>
+                            <div class="text-sm font-semibold text-slate-200">Praktik & Simulasi Pengadilan</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/50">
+                            <div class="text-cyan-400 font-mono text-xs mb-1"><i class="fa-solid fa-clock mr-1.5"></i> Alokasi Waktu</div>
+                            <div class="text-sm font-semibold text-slate-200">300 Menit (2 Sesi)</div>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/50">
+                            <div class="text-cyan-400 font-mono text-xs mb-1"><i class="fa-solid fa-bullseye mr-1.5"></i> Target</div>
+                            <div class="text-sm font-semibold text-slate-200">Sub-CPMK 13</div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-center items-center space-x-4">
+                        <button onclick="nextSlide()" class="px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 font-bold hover:brightness-110 transition-all shadow-lg shadow-cyan-500/25 flex items-center space-x-2">
+                            <span>Mulai Presentasi</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: CAPAIAN PEMBELAJARAN (SUB-CPMK 13) -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="2">
+                <div class="cyber-border rounded-3xl p-6 md:p-10 neon-glow">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                            <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Kompetensi Utama</span>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white">Capaian Pembelajaran (Sub-CPMK 13)</h2>
+                        </div>
+                    </div>
+
+                    <div class="p-6 rounded-2xl bg-cyan-950/40 border border-cyan-500/30 mb-6 text-lg text-slate-200 leading-relaxed font-light">
+                        "Mahasiswa mampu menyajikan dan mempertahankan hasil laporan analisis investigasi forensik digital di hadapan dewan penguji dalam suasana simulasi peradilan semu (<span class="text-cyan-400 font-semibold">Moot Court</span>), menerjemahkan terminologi teknis ke dalam bahasa yang mudah dipahami majelis hakim, serta membuktikan keabsahan rantai bukti (<span class="text-cyan-400 font-semibold">Chain of Custody</span>) dari tuduhan kontaminasi bukti."
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-5 rounded-2xl bg-slate-900/90 border border-cyan-900/60">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold mb-3">01</div>
+                            <h3 class="font-bold text-white mb-2">Penyajian Laporan</h3>
+                            <p class="text-sm text-slate-400">Menyampaikan hasil BAP dengan runtut, logis, dan berbasis data artefak digital yang valid.</p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-900/90 border border-cyan-900/60">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold mb-3">02</div>
+                            <h3 class="font-bold text-white mb-2">Terjemahan Teknis</h3>
+                            <p class="text-sm text-slate-400">Menjelaskan konsep rumit seperti nilai Hash dan Write-Blocker agar mudah dipahami Majelis Hakim.</p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-900/90 border border-cyan-900/60">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold mb-3">03</div>
+                            <h3 class="font-bold text-white mb-2">Keabsahan Bukti</h3>
+                            <p class="text-sm text-slate-400">Mempertahankan keutuhan Chain of Custody dari segala bentuk tuduhan kontaminasi atau rekayasa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: FORMAT & TATA TERTIB SIMULASI SIDANG SEMU -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="3">
+                <div class="cyber-border rounded-3xl p-6 md:p-10 neon-glow">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                            <i class="fa-solid fa-gavel text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Tata Tertib Sidang</span>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white">Format & Tata Tertib Simulasi Sidang Semu</h2>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-300 mb-6 text-sm md:text-base">
+                        Pertemuan 13 dirancang sebagai ajang pembuktian hasil investigasi kasus proyek praktikum kelompok 1, 2, dan 3. Ruang laboratorium ditata menyerupai ruang persidangan Pengadilan Negeri.
+                    </p>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="border-b border-cyan-800/60 text-cyan-400 text-sm font-mono">
+                                    <th class="p-4 bg-cyan-950/50 rounded-tl-xl">Pihak Persidangan</th>
+                                    <th class="p-4 bg-cyan-950/50">Tugas & Wewenang</th>
+                                    <th class="p-4 bg-cyan-950/50 rounded-tr-xl">Karakter Interaksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-cyan-950 text-sm text-slate-300">
+                                <tr class="hover:bg-slate-900/50 transition-colors">
+                                    <td class="p-4 font-semibold text-white flex items-center space-x-2">
+                                        <i class="fa-solid fa-user-tie text-cyan-400"></i>
+                                        <span>Majelis Hakim (Dosen PJMK)</span>
+                                    </td>
+                                    <td class="p-4">Memimpin persidangan, menilai kelayakan alat bukti, dan menguji pemahaman etika penyelidik.</td>
+                                    <td class="p-4 text-cyan-300 font-mono text-xs">Obyektif, Menguji, Mencari Kebenaran Materil</td>
+                                </tr>
+                                <tr class="hover:bg-slate-900/50 transition-colors">
+                                    <td class="p-4 font-semibold text-white flex items-center space-x-2">
+                                        <i class="fa-solid fa-laptop-code text-teal-400"></i>
+                                        <span>Saksi Ahli (Kelompok Penyaji)</span>
+                                    </td>
+                                    <td class="p-4">Mempresentasikan temuan BAP, menunjukkan artefak digital, dan membela keaslian hash bukti.</td>
+                                    <td class="p-4 text-teal-300 font-mono text-xs">Tenang, Berbasis Data Ilmiah, Lugas</td>
+                                </tr>
+                                <tr class="hover:bg-slate-900/50 transition-colors">
+                                    <td class="p-4 font-semibold text-white flex items-center space-x-2">
+                                        <i class="fa-solid fa-scale-balanced text-amber-400"></i>
+                                        <span>Jaksa / Pengacara (Kelompok Penguji)</span>
+                                    </td>
+                                    <td class="p-4">Mengajukan pertanyaan kritis, mencari celah dalam rantai penanganan bukti, dan memvalidasi SOP.</td>
+                                    <td class="p-4 text-amber-300 font-mono text-xs">Kritis, Skeptis, Menuntut Pembuktian</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: SIKAP & ETIKA SAKSI AHLI -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="4">
+                <div class="cyber-border rounded-3xl p-6 md:p-10 neon-glow">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                            <i class="fa-solid fa-user-shield text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Profisionalisme Sidang</span>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white">Sikap & Etika Saksi Ahli di Muka Persidangan</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="p-6 rounded-2xl bg-slate-900/90 border border-cyan-900/60 flex flex-col justify-between">
+                            <div>
+                                <div class="text-cyan-400 text-lg font-bold mb-3 flex items-center space-x-2">
+                                    <i class="fa-solid fa-hands-bound"></i>
+                                    <span>Bukan Pihak Pembela/Penuntut</span>
+                                </div>
+                                <p class="text-sm text-slate-300 leading-relaxed">
+                                    Ahli forensik bersumpah di bawah kitab suci untuk membela fakta ilmiah, bukan memenangkan jaksa maupun membebaskan terdakwa. Obyektivitas adalah harga mati.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-slate-800 text-xs text-cyan-400 font-mono">Prinsip 01 • Integritas Ilmiah</div>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-slate-900/90 border border-cyan-900/60 flex flex-col justify-between">
+                            <div>
+                                <div class="text-cyan-400 text-lg font-bold mb-3 flex items-center space-x-2">
+                                    <i class="fa-solid fa-comments"></i>
+                                    <span>Hindari Jargon Berlebihan</span>
+                                </div>
+                                <p class="text-sm text-slate-300 leading-relaxed">
+                                    Contoh: Jika Hakim bertanya "Apa arti hash SHA-256?", jelaskan bahwa <span class="text-cyan-300 font-semibold">"Nilai hash adalah sidik jari digital 64 digit. Jika 1 huruf dari 1 juta halaman berubah, seluruh sidik jari akan berubah total."</span>
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-slate-800 text-xs text-cyan-400 font-mono">Prinsip 02 • Komunikasi Efektif</div>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-slate-900/90 border border-cyan-900/60 flex flex-col justify-between">
+                            <div>
+                                <div class="text-cyan-400 text-lg font-bold mb-3 flex items-center space-x-2">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <span>Akui Keterbatasan Jika Ada</span>
+                                </div>
+                                <p class="text-sm text-slate-300 leading-relaxed">
+                                    Jika bukti tertentu telah tertimpa (<span class="text-cyan-300 font-semibold">overwritten</span>) secara permanen, katakan sejujurnya tanpa berspekulasi atau mengarang narasi palsu.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-slate-800 text-xs text-cyan-400 font-mono">Prinsip 03 • Kejujuran Akademik</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: CHAIN OF CUSTODY (GAMBAR 1) -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="5">
+                <div class="cyber-border rounded-3xl p-6 md:p-10 neon-glow">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                            <i class="fa-solid fa-link text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Dokumentasi Bukti</span>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white">Chain of Custody: Rantai Penguasaan Bukti</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/50 flex items-start space-x-3">
+                                <span class="px-2.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold text-xs">1</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Evidence Seizure (Penyitaan)</h4>
+                                    <p class="text-xs text-slate-300">Initial collection, documentation, and secure transport with bag & tag protocol.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/50 flex items-start space-x-3">
+                                <span class="px-2.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold text-xs">2</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Forensic Imaging (Pencitraan Bit-Stream)</h4>
+                                    <p class="text-xs text-slate-300">Using a hardware write-blocker to prevent any alteration during cloning.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/50 flex items-start space-x-3">
+                                <span class="px-2.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold text-xs">3</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Hashing & Logging</h4>
+                                    <p class="text-xs text-slate-300">Unique digital fingerprint (MD5/SHA-256) generated, verified, and recorded.</p>
+                                </div>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/50 flex items-start space-x-3">
+                                <span class="px-2.5 py-1 rounded bg-cyan-500 text-slate-950 font-bold text-xs">4</span>
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">Secure Storage</h4>
+                                    <p class="text-xs text-slate-300">Maintained in a secure environment with restricted biometric access.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="rounded-2xl overflow-hidden border border-cyan-500/40 bg-slate-950 p-2 text-center">
+                            <img src="/Images/gambar-1.jpeg" alt="Chain of Custody Illustration" class="w-full h-auto rounded-xl object-contain max-h-[380px] mx-auto hover:scale-105 transition-transform duration-300">
+                            <p class="text-xs text-slate-400 mt-2 font-mono">Visualisasi 4 Tahap Rantai Penguasaan Bukti Digital (Chain of Custody)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: HARDWARE WRITE-BLOCKER & FORENSIC IMAGING (GAMBAR 2) -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="6">
+                <div class="cyber-border rounded-3xl p-6 md:p-10 neon-glow">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                            <i class="fa-solid fa-hard-drive text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Alat Bukti Fisik</span>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white">Hardware Write-Blocker (Tableau T35u)</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="rounded-2xl overflow-hidden border border-cyan-500/40 bg-slate-950 p-2 text-center">
+                            <img src="Images/gambar-2.jpeg" alt="Tableau T35u Write-Blocker" class="w-full h-auto rounded-xl object-contain max-h-[380px] mx-auto hover:scale-105 transition-transform duration-300">
+                            <p class="text-xs text-slate-400 mt-2 font-mono">Tableau T35u Forensic Write-Blocker Connected to Evidence Drive</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-cyan-950/30 border border-cyan-500/40">
+                                <h4 class="font-bold text-cyan-300 mb-1"><i class="fa-solid fa-lock mr-2"></i> Pemblokiran Elektronik</h4>
+                                <p class="text-sm text-slate-300">Secara fisik dan elektronis memblokir sinyal penulisan (write-block) ke harddisk tersangka agar metadata akses tidak berubah.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60">
+                                <h4 class="font-bold text-white mb-1"><i class="fa-solid fa-lightbulb mr-2 text-amber-400"></i> Indikator LED Aktif</h4>
+                                <p class="text-sm text-slate-300">Lampu LED menyala pada status POWER, HOST, WRITE PROTECT, ACTIVITY, dan READ untuk menjamin transparansi di depan persidangan.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60">
+                                <h4 class="font-bold text-white mb-1"><i class="fa-solid fa-desktop mr-2 text-teal-400"></i> Akuisisi EnCase</h4>
+                                <p class="text-sm text-slate-300">Proses pencitraan bit-by-bit dilakukan menggunakan software EnCase untuk menghasilkan file citra (.Exx) yang sah secara hukum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: VERIFIKASI HASH SHA-256 (GAMBAR 3) -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="7">
+                <div class="cyber-border rounded-3xl p-6 md:p-10 neon-glow">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                            <i class="fa-solid fa-terminal text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Integritas Data</span>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white">Verifikasi Nilai Hash (MD5, SHA-1, SHA-256)</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="rounded-2xl overflow-hidden border border-cyan-500/40 bg-slate-950 p-3">
+                            <img src="Images/gambar-3.jpeg" alt="Terminal Verifikasi Hash CAINE OS" class="w-full h-auto rounded-xl object-contain max-h-[360px] mx-auto hover:scale-105 transition-transform duration-300">
+                            <p class="text-xs text-slate-400 mt-2 text-center font-mono">Terminal CAINE OS: Verifikasi Hash MD5, SHA-1, dan SHA-256</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60">
+                                <h4 class="font-bold text-cyan-300 mb-2">Sidik Jari Digital 64 Karakter</h4>
+                                <p class="text-sm text-slate-300">
+                                    Nilai hash SHA-256 adalah bukti matematis mutlak di pengadilan. Jika ada perubahan 1 bit data saja pada harddisk, nilai hash akan berubah secara total dan seketika terdeteksi.
+                                </p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-cyan-950/40 border border-cyan-500/30">
+                                <h4 class="font-bold text-white text-sm mb-2">Log Output Verifikasi (Status: OK)</h4>
+                                <div class="font-mono text-xs bg-slate-950 p-3 rounded-lg border border-cyan-800/50 text-cyan-300 space-y-1 overflow-x-auto">
+                                    <div>MD5    : 89602560872e1016ac37481a5842d93e</div>
+                                    <div>SHA-1  : 317138212fc006be74674264ba1a55455e5f9132</div>
+                                    <div>SHA256 : bd06c5d8e30f1063e828a681d8379ee751305c42c97f13ef440df9df7eba046a</div>
+                                    <div class="text-emerald-400 pt-1">Source & Image Verification: OK (100% Identical)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: TEKNIK VISUALISASI TEMUAN BUKTI DIGITAL (GAMBAR 5, 6, & 7) -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="8">
+                <div class="cyber-border rounded-3xl p-6 md:p-10 neon-glow">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                            <i class="fa-solid fa-chart-line text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Alat Peraga Persidangan</span>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white">Teknik Visualisasi Temuan Bukti Digital</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="rounded-2xl overflow-hidden border border-cyan-500/40 bg-slate-950 p-2 text-center">
+                            <img src="/Images/gambar-5.jpeg" alt="Spearphishing SuperTimeline" class="w-full h-auto rounded-xl object-contain max-h-[200px] mx-auto hover:scale-105 transition-transform duration-300">
+                            <p class="text-xs text-cyan-300 mt-2 font-mono">1. Spearphishing SuperTimeline (MACB)</p>
+                        </div>
+                        <div class="rounded-2xl overflow-hidden border border-cyan-500/40 bg-slate-950 p-2 text-center">
+                            <img src="Images/gambar-6.jpeg" alt="Diagram Aliran Komunikasi & Dana" class="w-full h-auto rounded-xl object-contain max-h-[200px] mx-auto hover:scale-105 transition-transform duration-300">
+                            <p class="text-xs text-cyan-300 mt-2 font-mono">2. Diagram Aliran Komunikasi & Dana</p>
+                        </div>
+                        <div class="rounded-2xl overflow-hidden border border-cyan-500/40 bg-slate-950 p-2 text-center">
+                            <img src="Images/gambar-7.jpeg" alt="Incident Response Timeline" class="w-full h-auto rounded-xl object-contain max-h-[200px] mx-auto hover:scale-105 transition-transform duration-300">
+                            <p class="text-xs text-cyan-300 mt-2 font-mono">3. Incident Response Timeline</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60">
+                            <h4 class="font-bold text-cyan-400 mb-1"><i class="fa-solid fa-clock mr-2"></i> Garis Waktu Insiden (Timeline)</h4>
+                            <p class="text-xs text-slate-300">Grafik horizontal memperlihatkan menit demi menit: mulai dari email phishing dibuka, malware PsExec aktif, hingga unallocated space dihapus.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60">
+                            <h4 class="font-bold text-cyan-400 mb-1"><i class="fa-solid fa-network-wired mr-2"></i> Diagram Komunikasi & Dana</h4>
+                            <p class="text-xs text-slate-300">Memetakan pertukaran pesan WhatsApp antar-tersangka beserta korelasi transfer rekening bank dan stempel waktu pengiriman dokumen rahasia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: SIMULASI PERTANYAAN JEBAKAN UJI SILANG -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="9">
+                <div class="cyber-border rounded-3xl p-6 md:p-10 neon-glow">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                            <i class="fa-solid fa-shield-cat text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Cross-Examination</span>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white">Mempertahankan Nilai Hash dari Tuduhan Rekayasa</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div class="rounded-2xl overflow-hidden border border-cyan-500/40 bg-slate-950 p-2 text-center">
+                            <img src="Images/gambar-4.jpeg" alt="Saksi Ahli di Muka Persidangan" class="w-full h-auto rounded-xl object-contain max-h-[340px] mx-auto hover:scale-105 transition-transform duration-300">
+                            <p class="text-xs text-slate-400 mt-2 font-mono">Ilustrasi Saksi Ahli Mempresentasikan Data Timeline di Sidang</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="p-5 rounded-2xl bg-amber-950/20 border border-amber-500/40">
+                                <div class="flex items-center space-x-2 text-amber-400 font-bold mb-2">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                    <span>Pertanyaan Pengacara (Penasihat Hukum):</span>
+                                </div>
+                                <p class="text-slate-200 italic text-sm">
+                                    "Saudara Ahli, apakah ada kemungkinan penyidik kepolisian sengaja menyalin file atau malware ke laptop klien saya saat proses penyitaan di lokasi kejadian?"
+                                </p>
+                            </div>
+
+                            <div class="p-5 rounded-2xl bg-cyan-950/40 border border-cyan-500/50">
+                                <div class="flex items-center space-x-2 text-cyan-400 font-bold mb-2">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                    <span>Jawaban Tepat Saksi Ahli di Muka Persidangan:</span>
+                                </div>
+                                <p class="text-slate-200 text-sm leading-relaxed">
+                                    "Secara teknis <strong>tidak mungkin</strong>, Yang Mulia. Sebelum harddisk diakses, media fisik dihubungkan ke <strong>Hardware Write-Blocker Tableau T8u</strong> yang secara elektronik memblokir sinyal penulisan. Nilai SHA-256 <em>pre-acquisition</em> yang dihitung saat penyitaan adalah <code class="text-cyan-300 bg-slate-900 px-2 py-0.5 rounded font-mono">a1b2...</code>, dan nilai hash citra bukti yang dianalisis di lab bernilai <strong>100% identik</strong>. Jika ada 1 byte saja data disisipkan, nilai hash tersebut pasti berubah total!"
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 10: RUBRIK PENILAIAN SIDANG SEMU -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="10">
+                <div class="cyber-border rounded-3xl p-6 md:p-10 neon-glow">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                            <i class="fa-solid fa-star text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Evaluasi & Penilaian</span>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white">Rubrik Penilaian Sidang Semu Bagian 1</h2>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                        <div class="p-5 rounded-2xl bg-slate-900/90 border border-cyan-900/60 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-mono text-cyan-400">Kriteria 01</span>
+                                    <span class="px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold text-xs">25%</span>
+                                </div>
+                                <h3 class="font-bold text-white mb-2">Kerapian Dokumen BAP</h3>
+                                <p class="text-xs text-slate-400">Dokumen tersusun sesuai format resmi, ada nilai hash ganda, dan formulir CoC bertandatangan lengkap.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-slate-900/90 border border-cyan-900/60 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-mono text-cyan-400">Kriteria 02</span>
+                                    <span class="px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold text-xs">25%</span>
+                                </div>
+                                <h3 class="font-bold text-white mb-2">Kejelasan Presentasi</h3>
+                                <p class="text-xs text-slate-400">Mampu menyampaikan temuan dalam 15 menit dengan media visual diagram timeline yang lugas dan runtut.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-slate-900/90 border border-cyan-900/60 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-mono text-cyan-400">Kriteria 03</span>
+                                    <span class="px-2 py-1 rounded bg-teal-400 text-slate-950 font-bold text-xs">30%</span>
+                                </div>
+                                <h3 class="font-bold text-white mb-2">Argumentasi Teknis</h3>
+                                <p class="text-xs text-slate-400">Mampu mempertahankan validitas metode ilmiah saat dihujani pertanyaan sanggahan oleh kelompok lawan.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-slate-900/90 border border-cyan-900/60 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-xs font-mono text-cyan-400">Kriteria 04</span>
+                                    <span class="px-2 py-1 rounded bg-cyan-500 text-slate-950 font-bold text-xs">20%</span>
+                                </div>
+                                <h3 class="font-bold text-white mb-2">Kepatuhan Etika Profesi</h3>
+                                <p class="text-xs text-slate-400">Menjunjung tinggi obyektivitas, tenang, santun, dan menghormati tata tertib persidangan universitas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 11: DAFTAR PUSTAKA & RUJUKAN -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="11">
+                <div class="cyber-border rounded-3xl p-6 md:p-10 neon-glow">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                            <i class="fa-solid fa-book-bookmark text-2xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Referensi Akademik</span>
+                            <h2 class="text-2xl md:text-3xl font-bold text-white">Daftar Pustaka & Standar Rujukan</h2>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 max-w-4xl mx-auto">
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60 flex items-start space-x-4">
+                            <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold flex-shrink-0 text-sm">1</div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Bodziak, William J. (2008)</h4>
+                                <p class="text-xs text-slate-300"><em>Forensic Science: An Introduction to Scientific and Investigative Techniques</em>. CRC Press.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60 flex items-start space-x-4">
+                            <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold flex-shrink-0 text-sm">2</div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">ISO/IEC 27037:2012</h4>
+                                <p class="text-xs text-slate-300">Guidelines for identification, collection, acquisition, and preservation of digital evidence.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-cyan-900/60 flex items-start space-x-4">
+                            <div class="w-8 h-8 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold flex-shrink-0 text-sm">3</div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">Kitab Undang-Undang Hukum Acara Pidana (KUHAP)</h4>
+                                <p class="text-xs text-slate-300">Republik Indonesia — Landasan hukum sahnya alat bukti petunjuk dan keterangan ahli di persidangan.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 12: PENUTUP & ROBO-PATROL AI -->
+            <div class="slide hidden transition-all duration-500 transform" data-slide="12">
+                <div class="cyber-border rounded-3xl p-8 md:p-14 text-center relative overflow-hidden neon-glow-lg">
+                    <div class="absolute -top-24 -right-24 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                    
+                    <div class="w-16 h-16 rounded-2xl bg-cyan-500/20 text-cyan-400 border border-cyan-500/40 flex items-center justify-center text-3xl mx-auto mb-6 neon-glow">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-3 text-glow">
+                        ROBO-PATROL DF-07
+                    </h2>
+
+                    <p class="text-cyan-300 font-mono text-sm mb-6">
+                        "Halo Detektif! Saya Robot Patroli AI UNIQHBA, memindai integritas berkas digital di seluruh portal."
+                    </p>
+
+                    <div class="p-6 rounded-2xl bg-cyan-950/40 border border-cyan-500/30 max-w-xl mx-auto mb-8 text-slate-300 text-sm">
+                        <p class="font-semibold text-white mb-2">Sidang Semu Bagian 1 Selesai.</p>
+                        <p class="text-xs text-slate-400">Semua kelompok diharapkan menyiapkan berkas BAP final dan lembar Chain of Custody bertandatangan lengkap untuk sesi uji silang berikutnya.</p>
+                    </div>
+
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="goToSlide(1)" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-cyan-950 text-cyan-400 border border-cyan-800 transition-all font-semibold text-sm flex items-center space-x-2">
+                            <i class="fa-solid fa-rotate-right"></i>
+                            <span>Kembali ke Awal</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Bottom Navigation Control Bar -->
+    <footer class="w-full border-t border-cyan-900/50 bg-slate-950/90 backdrop-blur-md px-6 py-4 flex items-center justify-between z-40">
+        <button onclick="prevSlide()" id="prev-btn" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-cyan-950 text-cyan-400 border border-cyan-800/60 transition-all text-sm font-semibold flex items-center space-x-2 disabled:opacity-40 disabled:cursor-not-allowed">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span class="hidden sm:inline">Sebelumnya</span>
+        </button>
+
+        <div class="flex items-center space-x-1.5" id="pagination-dots">
+            <!-- Dynamic dots generated via JS -->
+        </div>
+
+        <button onclick="nextSlide()" id="next-btn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 text-slate-950 font-bold hover:brightness-110 transition-all text-sm shadow-md shadow-cyan-500/20 flex items-center space-x-2 disabled:opacity-40 disabled:cursor-not-allowed">
+            <span class="hidden sm:inline">Selanjutnya</span>
+            <i class="fa-solid fa-arrow-right"></i>
+        </button>
+    </footer>
+
+    <!-- Slide Index Modal Overview -->
+    <div id="overview-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="cyber-border rounded-3xl p-6 max-w-4xl w-full max-h-[85vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-4 mb-4 border-b border-cyan-900">
+                <h3 class="text-xl font-bold text-white flex items-center space-x-2">
+                    <i class="fa-solid fa-grip text-cyan-400"></i>
+                    <span>Indeks Slide Presentasi</span>
+                </h3>
+                <button onclick="toggleOverview()" class="p-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3" id="modal-grid">
+                <!-- Generated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Slide Control Engine -->
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 12;
+
+        const slideTitles = [
+            "1. Cover / Judul Utama",
+            "2. Capaian Pembelajaran",
+            "3. Tata Tertib Sidang Semu",
+            "4. Sikap & Etika Saksi Ahli",
+            "5. Chain of Custody",
+            "6. Hardware Write-Blocker",
+            "7. Verifikasi Nilai Hash",
+            "8. Visualisasi Bukti Digital",
+            "9. Simulasi Uji Silang",
+            "10. Rubrik Penilaian",
+            "11. Daftar Pustaka",
+            "12. Penutup & AI Robo-Patrol"
+        ];
+
+        function updateSlide() {
+            // Hide all slides
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.add('hidden');
+                slide.classList.remove('block');
+            });
+
+            // Show current slide
+            const activeSlide = document.querySelector(`.slide[data-slide="${currentSlide}"]`);
+            if (activeSlide) {
+                activeSlide.classList.remove('hidden');
+                activeSlide.classList.add('block');
+            }
+
+            // Update counter
+            document.getElementById('slide-counter').textContent = `Slide ${currentSlide} / ${totalSlides}`;
+
+            // Update buttons
+            document.getElementById('prev-btn').disabled = currentSlide === 1;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+
+            updateDots();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            updateSlide();
+            // Close overview modal if open
+            document.getElementById('overview-modal').classList.add('hidden');
+        }
+
+        function updateDots() {
+            const container = document.getElementById('pagination-dots');
+            container.innerHTML = '';
+            // Only show a subset of dots on mobile, all on desktop
+            for (let i = 1; i <= totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = `w-2.5 h-2.5 rounded-full transition-all ${i === currentSlide ? 'bg-cyan-400 w-6' : 'bg-slate-800 hover:bg-slate-700'}`;
+                dot.onclick = () => goToSlide(i);
+                container.appendChild(dot);
+            }
+        }
+
+        function toggleOverview() {
+            const modal = document.getElementById('overview-modal');
+            modal.classList.toggle('hidden');
+            
+            if (!modal.classList.contains('hidden')) {
+                const grid = document.getElementById('modal-grid');
+                grid.innerHTML = '';
+                slideTitles.forEach((title, index) => {
+                    const sNum = index + 1;
+                    const card = document.createElement('div');
+                    card.className = `p-4 rounded-xl border cursor-pointer transition-all ${sNum === currentSlide ? 'bg-cyan-950/80 border-cyan-400 text-cyan-300' : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-cyan-700'}`;
+                    card.innerHTML = `<div class="text-xs font-mono text-cyan-400 mb-1">Slide ${sNum}</div><div class="font-semibold text-sm">${title}</div>`;
+                    card.onclick = () => goToSlide(sNum);
+                    grid.appendChild(card);
+                });
+            }
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevSlide();
+            } else if (e.key === 'Escape') {
+                document.getElementById('overview-modal').classList.add('hidden');
+            }
+        });
+
+        // Initialize on load
+        window.onload = function() {
+            updateSlide();
+        };
+    </script>
+</body>
+</html>
